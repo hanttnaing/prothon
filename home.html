@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Landing Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Optional font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #40DF4B;
+      --primary-light: #A2FCA9;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --bg-page: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Layout helpers */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 18px 0;
+      border-bottom: 1px solid #f0f0f0;
+      background-color: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 56px 0 48px;
+      background-color: #ffffff;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1 1 320px;
+      max-width: 520px;
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .hero-text p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 26px;
+      border-radius: 999px;
+      background-color: var(--primary);
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+      box-shadow: 0 8px 18px rgba(64, 223, 75, 0.3);
+    }
+
+    .btn-primary:hover {
+      background-color: #35c640;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(64, 223, 75, 0.35);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(64, 223, 75, 0.25);
+    }
+
+    .hero-image {
+      flex: 1 1 260px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      width: 260px;
+      max-width: 100%;
+    }
+
+    /* Middle banner */
+    .middle-banner {
+      background-color: var(--primary-light);
+      padding: 42px 0;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .middle-banner h2 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .middle-banner p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Features section */
+    .features-section {
+      padding: 56px 0 60px;
+      background-color: #ffffff;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .features-header h2 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .feature-card {
+      background-color: var(--primary-light);
+      border-radius: 16px;
+      padding: 28px 22px 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .feature-icon {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 18px;
+    }
+
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .feature-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ABOUT US SECTION */
+    .about-section {
+      padding: 80px 0;
+    }
+
+    .about-inner {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .about-img {
+      width: 470px;
+      height: 300px;
+      background: #d6d6d6;
+      border-radius: 20px;
+    }
+
+    .about-text h2 {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 480px;
+      color: #444;
+    }
+
+    /* Footer spacer (simple) */
+    footer {
+      padding: 24px 0 32px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999999;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-inner {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .hero-text {
+        max-width: none;
+      }
+
+      .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-image {
+        margin-bottom: 12px;
+      }
+
+      nav ul {
+        gap: 18px;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        max-width: 360px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header>
+      <div class="container header-inner">
+        <div class="logo">Logo</div>
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <a href="#about-us">About Us</a>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1 class="hero-title">Lorem Ipsum</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipiscing elit.
+              Sit amet consectetur adipiscing elit quisque faucibus ex.
+              Adipiscing elit quisque faucibus ex sapien vitae pellentesque.
+            </p>
+            <button class="btn-primary">Learn more</button>
+          </div>
+
+          <div class="hero-image">
+            <!-- 3D illustration -->
+            <img src="images/reactor.png" alt="Server illustration" style="width:500px;" />
+          </div>
+        </div>
+      </section>
+
+      <!-- MIDDLE BANNER -->
+      <section class="middle-banner">
+        <div class="container">
+          <h2>Lorem Ipsum</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit
+            amet consectetur adipiscing elit quisque faucibus.
+          </p>
+        </div>
+      </section>
+
+      <!-- FEATURES SECTION -->
+      <section class="features-section">
+        <div class="container">
+          <div class="features-header">
+            <h2>Lorem Ipsum</h2>
+          </div>
+
+          <div class="feature-grid">
+            <!-- Mission -->
+            <article class="feature-card">
+                <div class="feature-icon">
+                    <img src="images/mission.png" alt="Mission icon" />              
+                </div>
+              <h3 class="feature-title">Mission</h3>
+              <p class="feature-text">
+                Our mission is to entitle individuals and communities with clear, 
+                accessible, and science-based knowledge about Small Modular Reactors (SMRs) 
+                and nuclear power plants. We aim to demystify nuclear technology, 
+                promote energy literacy, and inspire informed decision-making for a sustainable 
+                and resilient energy future.
+              </p>
+            </article>
+
+            <!-- Vision -->
+            <article class="feature-card">
+              <div class="feature-icon">
+                <img src="images/vision.png" alt="Vision icon" />
+              </div>
+              <h3 class="feature-title">Vision</h3>
+              <p class="feature-text">
+                We envision a world where nuclear energy, especially next-generation 
+                technologies like SMRs is widely understood, responsibly adopted, 
+                and recognized as a key contributor to clean, reliable, and carbon-neutral power. 
+                Through education and innovation, we strive to bridge the gap between the public, 
+                policymakers, and the nuclear industry.
+              </p>
+            </article>
+
+            <!-- Future Plan -->
+            <article class="feature-card">
+              <div class="feature-icon">
+                <img src="images/futureplan.png" alt="Future plan icon" />
+              </div>
+              <h3 class="feature-title">Future Plan</h3>
+              <p class="feature-text">
+                In the future, the project will evolve with interactive visualizations and simulations 
+                that let users explore how SMRs and nuclear plants work. We plan to add gamified learning, 
+                integrate real-world energy data, and create a collaborative community for discussions 
+                and expert insights. The platform will also become more accessible through multilingual 
+                support and a dedicated mobile app, helping nuclear education reach a global audience.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 🌟 ABOUT US SECTION (added, nothing else changed) -->
+    <section class="about-section" id="about-us">
+        
+      <div class="container about-inner">
+
+        <div class="about-img"></div>
+
+        <div class="about-text">
+          <h2>About Us</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipiscing elit.
+            Consectetur adipiscing elit quisque faucibus ex sapien vitae.
+            Ex sapien vitae pellentesque sem placerat in id.
+            Placerat in id cursus mi pretium tellus duis.
+            Pretium tellus duis convallis tempus leo eu aenean.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    </main>
+    <!-- FOOTER -->
+<footer style="
+  background:#f9f9f9;
+  padding:40px 0 25px;
+  margin-top:50px;
+  border-top:1px solid #eaeaea;
+">
+  <div style="
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 20px;
+    text-align:center;
+  ">
+
+    <h3 style="
+      font-size:1.3rem;
+      margin-bottom:12px;
+      color:#222;
+      font-weight:600;
+    ">
+      Your Company
+    </h3>
+
+    <div style="
+      margin-bottom:18px;
+      display:flex;
+      justify-content:center;
+      gap:25px;
+      font-size:0.95rem;
+    ">
+      <a href="#" style="color:#555; text-decoration:none;">Home</a>
+      <a href="#" style="color:#555; text-decoration:none;">About Us</a>
+      <a href="#" style="color:#555; text-decoration:none;">FAQ</a>
+    </div>
+
+    <p style="
+      font-size:0.8rem;
+      color:#777;
+      margin-top:12px;
+    ">
+      © 2025 Your Company. All rights reserved.
+    </p>
+
+  </div>
+</footer>
+
+    
+  </div>
+</body>
+</html>
